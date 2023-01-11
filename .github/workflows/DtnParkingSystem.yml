@@ -18,6 +18,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+    - name: Restore
+      run: dotnet restore "TestParkingSystem.sln"
     - name: Build
       run: dotnet build "TestParkingSystem.sln" --configuration ${{ env.CONFIGURATION }} --no-restore
     - name: Test
