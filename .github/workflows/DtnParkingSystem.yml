@@ -46,3 +46,4 @@ jobs:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.DtnParkingSystem_B36B }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
