@@ -1,0 +1,75 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using TestParkingSystem.Interface;
+using TestParkingSystem.Models;
+
+namespace TestParkingSystem.Controllers
+{
+
+    public class HomeController : Controller
+    {
+
+
+        private ParkingDetails _parkingDetails;
+        private readonly IGetParkingDetails _getParkingDetails;
+        private readonly IManageParkingSpaces _manageParkingSpace;
+
+
+        public HomeController(IGetParkingDetails getParkingDetails, IManageParkingSpaces manageParkingSpace, ParkingDetails parkingDetails)
+        {
+            _getParkingDetails = getParkingDetails;
+            _manageParkingSpace = manageParkingSpace;
+            _parkingDetails = parkingDetails;
+        }
+
+
+
+        public async Task<IActionResult> Index()
+        {
+            var floorSpaces = _getParkingDetails.GetAllParkingSpaces();
+            var occupantDetails = await _getParkingDetails.GetOccupant();
+
+            _parkingDetails.ParkingSpaces = floorSpaces.Result;
+            _parkingDetails.Occupants = occupantDetails;
+
+            ViewBag.OccupantsAvailable = _getParkingDetails.GetFilteredList().Result;
+            ViewBag.CarList = _getParkingDetails.GetCarFilteredList().Result;
+            ViewBag.MotorBikeList = _getParkingDetails.GetMotorOrBikeFilteredList().Result;
+
+            ViewBag.AllFloors = _getParkingDetails.GetAllFloorSpaces().Result;
+
+
+            return View(_parkingDetails);
+
+
+        }
+
+        [ActionName("FreeUp")]
+        [Route("FreeUp")]
+        public IActionResult FreeUp([FromForm] IFormCollection formCollection)
+        {
+
+            _manageParkingSpace.FreeSpace(formCollection["slotnumber"], formCollection["Occupant"], formCollection["floor"], formCollection["vehicleType"]);
+            TempData["Message"] = "Success";
+            return RedirectToAction("Index");
+        }
+
+
+        [ActionName("Submit")]
+        [Route("Submit")]
+        public IActionResult Submit([FromForm] IFormCollection formCollection)
+        {
+
+
+            _manageParkingSpace.Occupy(formCollection["slotnumber"], formCollection["Occupant"], formCollection["floor"], formCollection["vehicleType"]);
+            TempData["Message"] = "Success";
+            return RedirectToAction("Index");
+
+        }
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}
