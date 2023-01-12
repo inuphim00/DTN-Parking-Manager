@@ -3103,7 +3103,7 @@ progress {
         }
     }
 
-    @media (max-width: 1920px) and (min-width:414px) {
+    @media (max-width: 5000px) and (min-width:414px) {
         .btn {
             --bs-btn-padding-x: 0.75rem;
             --bs-btn-padding-y: 0.375rem;
@@ -4764,7 +4764,7 @@ progress {
     }
 
 
-    @media (max-width: 1920px) {
+    @media (max-width: 5000px) {
         .card {
             --bs-card-spacer-y: 1rem;
             --bs-card-spacer-x: 1rem;
