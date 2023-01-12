@@ -81,11 +81,12 @@
 									if (occupantDetails.FullName == parkingSpace.Occupant)
 									{
 										var thisDate = parkingSpace.DateTime.ToDateTime();
+										var convertedTime = thisDate.ToLocalTime();
 										<p><strong>Plate Number: </strong>@occupantDetails.PlateNumber</p>
 										<p><strong>Contact Number: </strong>@occupantDetails.ContactNumber </p>
 										<p><strong>Vehicle: </strong>@occupantDetails.Vehicle</p>
-										<p><strong>Date: </strong>@thisDate.ToString("ddd, dd MMM yyy")</p>
-										<p><strong>Time: </strong>@thisDate.ToString("hh:mm tt")</p>
+										<p><strong>Date: </strong>@convertedTime.ToString("ddd, dd MMM yyy")</p>
+										<p><strong>Time: </strong>@convertedTime.ToString("hh:mm tt")</p>
 									}
 								}
 

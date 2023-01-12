@@ -49,7 +49,7 @@ namespace TestParkingSystem.Services
 		public async void Occupy(string slotNumber, string occupant, string floor, string vehicleType)
 		{
 			var slotnumber = slotNumber;
-			var thisDateTime = DateTime.Now;
+			var thisDateTime = DateTime.UtcNow;
 			var specifiedDateTime = DateTime.SpecifyKind(thisDateTime, DateTimeKind.Utc);
 			var converterDateTime = Timestamp.FromDateTime(specifiedDateTime);
 
