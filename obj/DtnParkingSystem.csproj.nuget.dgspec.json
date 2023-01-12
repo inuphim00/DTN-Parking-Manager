@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Phim\\Documents\\parkingmanger\\DtnParkingSystem.csproj": {}
+    "C:\\Users\\Phim\\Documents\\DtnParkingManager\\DtnParkingSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Phim\\Documents\\parkingmanger\\DtnParkingSystem.csproj": {
+    "C:\\Users\\Phim\\Documents\\DtnParkingManager\\DtnParkingSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Phim\\Documents\\parkingmanger\\DtnParkingSystem.csproj",
+        "projectUniqueName": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\DtnParkingSystem.csproj",
         "projectName": "DtnParkingSystem",
-        "projectPath": "C:\\Users\\Phim\\Documents\\parkingmanger\\DtnParkingSystem.csproj",
+        "projectPath": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\DtnParkingSystem.csproj",
         "packagesPath": "C:\\Users\\Phim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Phim\\Documents\\parkingmanger\\obj\\",
+        "outputPath": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Phim\\AppData\\Roaming\\NuGet\\NuGet.Config",
