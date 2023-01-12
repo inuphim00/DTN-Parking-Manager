@@ -10,17 +10,26 @@
 <div class="container d-flex flex-wrap" style="width:100%;">
         @foreach (var item in Model)
         {
-       
-            @using (Html.BeginForm("Delete", "Occupants", FormMethod.Post, new { @name = "Form4" }))
+         string[] nameSplit = item.FullName.Split(new string[] { "," , " "}, StringSplitOptions.RemoveEmptyEntries);
+                    
+         string initials = "";
+        foreach (string items in nameSplit)
+        {
+            initials += items.Substring(0, 1).ToUpper();
+        }
+        @using (Html.BeginForm("Delete", "Occupants", FormMethod.Post, new { 
+            @name = "Form4" }))
             {
           
                     <div class="card bg-secondary mb-3">
                         <div class="card-body">
                             <center>
-                                <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" style="width:100px;height:100px;">
-                 
+                        <div class="initial-avatar">@initials</div><br>
+                               
 
+                          
                             <h6 class="card-title"><strong>@item.FullName</strong></h6>
+                           
                             </center>
                              <p class="card-text"><strong>Plate Number:</strong>@item.PlateNumber<br /><strong>Contact Number:</strong><br />@item.ContactNumber<br /><strong>Vehicle:</strong>@item.Vehicle</p>
                     

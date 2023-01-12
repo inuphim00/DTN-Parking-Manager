@@ -85,6 +85,20 @@ body {
         opacity: 1
     }
 }
+.initial-avatar {
+    /* Center the content */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    /* Colors */
+    background-color: #6793d6;
+    color: #fff;
+    /* Rounded border */
+    border-radius: 50%;
+    height: 6rem;
+    width: 6rem;
+    font-size: 35px;
+}
 
 #myDiv {
     display: none;
