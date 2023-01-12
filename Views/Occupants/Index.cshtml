@@ -13,9 +13,8 @@
        
             @using (Html.BeginForm("Delete", "Occupants", FormMethod.Post, new { @name = "Form4" }))
             {
-            <div class="row m-2">
-                <div class="col">
-                    <div class="card bg-secondary mb-3" style="width:100%;">
+          
+                    <div class="card bg-secondary mb-3">
                         <div class="card-body">
                             <center>
                                 <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" style="width:100px;height:100px;">
@@ -23,16 +22,15 @@
 
                             <h6 class="card-title"><strong>@item.FullName</strong></h6>
                             </center>
-                             <p class="card-text"><strong>Plate Number:</strong>@item.PlateNumber<br /><strong>Contact Number:</strong>@item.ContactNumber<br /><strong>Vehicle:</strong>@item.Vehicle</p>
+                             <p class="card-text"><strong>Plate Number:</strong>@item.PlateNumber<br /><strong>Contact Number:</strong><br />@item.ContactNumber<br /><strong>Vehicle:</strong>@item.Vehicle</p>
                     
                         </div>
                         <div class="card-footer">
-                            <button name="@item.FullName|@item.ContactNumber|@item.PlateNumber|@item.Vehicle" type="button" id="editUser" class="btn btn-primary" style="width:5rem;">Edit</button>
-                            <button name="@item.FullName" type="button" id="ddlDeleteUser" class="btn btn-danger" style="width:5rem;">Delete</button>
+                            <button name="@item.FullName|@item.ContactNumber|@item.PlateNumber|@item.Vehicle" type="button" id="editUser" class="btn btn-primary" >Edit</button>
+                            <button name="@item.FullName" type="button" id="ddlDeleteUser" class="btn btn-danger" >Delete</button>
                         </div>
                     </div>
-                 </div>
-            </div>
+        
            
                 @Html.Hidden("userToDelete", null , new{id = "hfUserToDelete"})
            
@@ -172,6 +170,7 @@
     var btnEdit = document.getElementById("editUser");
     var spanEdit = document.getElementsByClassName("closeEdit")[0];
     $("body").on("click", "#editUser", function () {
+
         var details = this.getAttribute("name");
        
         const detailsArr = details.split("|");
@@ -198,40 +197,50 @@
     //register user function 
     $("body").on("click", "#ddlSubmit", function () {
         var fullname = $("#fullName").val();
-        var vehicle = $("#vehicleType").val();
-        var platenumber = $("#plateNumber").val();
-        var contactnumber = $("#contactNumber").val();
-        if(fullname && contactnumber && platenumber){
-            var validPhone = /^\d{11}$/;
-            if(contactnumber.match(validPhone)){
-                swal({
-                    title: "Register a "+vehicle,
-                    text: "under the name of "+fullname,
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
 
-                            $("#hfFullName").val(fullname);
-                            $("#hfContactNumber").val(contactnumber);
-                            $("#hfVehicleType").val(vehicle);
-                            $("#hfPlateNumber").val(platenumber);
-                            go = setTimeout(register);
+         let occupants = document.querySelectorAll('h6.card-title');
+        occupants.forEach(occupants => {
+            if (occupants.textContent.includes(fullname)) {
+               swal("User already exist!", " A vehicle instance of this user already exist, try a different name", "error");
+            } else {
+                var vehicle = $("#vehicleType").val();
+                var platenumber = $("#plateNumber").val();
+                var contactnumber = $("#contactNumber").val();
+                if (fullname && contactnumber && platenumber) {
+                    var validPhone = /^\d{11}$/;
+                    if (contactnumber.match(validPhone)) {
+                        swal({
+                            title: "Register a " + vehicle,
+                            text: "under the name of " + fullname,
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                            .then((willDelete) => {
+                                if (willDelete) {
 
-                        } else {
-                            swal("Changes not saved!");
-                        }
-                    });
-                }else{
-                swal("Input valid phone number", " ", "error");
+                                    $("#hfFullName").val(fullname);
+                                    $("#hfContactNumber").val(contactnumber);
+                                    $("#hfVehicleType").val(vehicle);
+                                    $("#hfPlateNumber").val(platenumber);
+                                    go = setTimeout(register);
+
+                                } else {
+                                    swal("Changes not saved!");
+                                }
+                            });
+                    } else {
+                        swal("Input valid phone number", " ", "error");
+                    }
+
+
+                } else {
+                    swal("Please fill all forms", " ", "error");
                 }
+            }
+        });
 
-
-         }else{
-             swal("Please fill all forms"," ", "error");
-         }
+       
 
     });
     //end of register user function
@@ -354,9 +363,9 @@
         let occupants = document.querySelectorAll('h6.card-title');
         occupants.forEach(occupants =>{
             if(occupants.textContent.toLowerCase().includes(currentValue)){
-                occupants.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = 'block';
+                occupants.parentNode.parentNode.parentNode.parentNode.style.display = 'block';
             }else{
-                occupants.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = 'none' 
+                occupants.parentNode.parentNode.parentNode.parentNode.style.display = 'none' 
             }
         })
     });

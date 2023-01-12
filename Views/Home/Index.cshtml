@@ -25,7 +25,7 @@
 				@if (string.IsNullOrEmpty(parkingSpace.Occupant))
 				{
 						
-						<div class="card text-white bg-success mb-3" style="width:15rem;max-height:22rem;">
+						<div class="card text-white bg-success mb-3">
 							<div class="card-header"><strong>Slot: </strong>@parkingSpace.SlotNumber</div>
 							<div class="card-body">
 
@@ -40,14 +40,14 @@
 									<br>
 									<strong>@parkingSpace.SlotType</strong>
 								</center>
-								
-							
+
+
 								if(parkingSpace.SlotType == "Car"){
-									<h4 class="card-title">@Html.DropDownList(parkingSpace.SlotNumber+"|"+parkingSpace.Floor+"|"+parkingSpace.SlotType, new SelectList(ViewBag.CarList),"", new {id = "ddlOccupant", @class="js-example-placeholder-single js-states form-control"})</h4>
-								}
+									<h4 class="card-title">@Html.DropDownList(parkingSpace.SlotNumber+"|"+parkingSpace.Floor+"|"+parkingSpace.SlotType, new SelectList(ViewBag.CarList),"", new {id = "ddlOccupant", @class="js-example-responsive js-states form-control" ,style="width:100%;"})</h4>
+							}
 								else
 								{
-									<h4 class="card-title">@Html.DropDownList(parkingSpace.SlotNumber+"|"+parkingSpace.Floor+"|"+parkingSpace.SlotType, new SelectList(ViewBag.MotorBikeList),"", new {id = "ddlOccupant", @class="js-example-placeholder-single js-states form-control"})</h4>
+									<h4 class="card-title">@Html.DropDownList(parkingSpace.SlotNumber+"|"+parkingSpace.Floor+"|"+parkingSpace.SlotType, new SelectList(ViewBag.MotorBikeList),"", new {id = "ddlOccupant", @class="js-example-responsive js-states form-control",style="width:100%;"})</h4>
 								}
 
 								<input type="hidden" id="@ViewBag.Floor" name="thisfloor">
@@ -67,7 +67,7 @@
 				{
 					@using (Html.BeginForm("FreeUp", "Home", FormMethod.Post, new { @name = "Form2" }))
 					{
-						<div class="card text-white bg-danger mb-3" style="width:15rem;">
+						<div class="card text-white bg-danger mb-3">
 							<div class="card-header"><strong>Slot: </strong>@parkingSpace.SlotNumber
 								
 							</div>
@@ -104,7 +104,7 @@
 
 					}
 				}
-				<p>&nbsp;&nbsp;</p>
+			
 			}
 
 		}
@@ -118,7 +118,7 @@
 <script src="https://rawgit.com/select2/select2/4.0.5/dist/js/select2.full.min.js"></script>
 							
 <script type="text/javascript">
-	$('.js-example-placeholder-single').select2({
+	$('.js-example-responsive').select2({
 		placeholder: "Available",
 		allowClear: true
 	});
