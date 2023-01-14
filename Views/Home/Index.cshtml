@@ -79,9 +79,14 @@
 									{
 										var thisDate = parkingSpace.DateTime.ToDateTime();
 										var convertedTime = thisDate.ToLocalTime();
-										<p><strong>Plate Number: </strong>@occupantDetails.PlateNumber</p>
+										if (!string.IsNullOrEmpty(occupantDetails.PlateNumber))
+										{
+											<p><strong>Plate Number: </strong>@occupantDetails.PlateNumber</p>
+										}
 										<h6><strong>Contact Number: </strong>@occupantDetails.ContactNumber</h6>
+									
 										<h6><strong>Vehicle: </strong>@occupantDetails.Vehicle</h6>
+									
 										<h6><strong>Date: </strong>@convertedTime.ToString("ddd, dd MMM yyy")</h6>
 										<h6><strong>Time: </strong>@convertedTime.ToString("hh:mm tt")</h6>
 									}

@@ -33,8 +33,7 @@ namespace DtnParkingSystem.Services
 
         public async Task<string> EditUser(string fullName, string contactNumber, string plateNumber, string vehicleType, string originalName)
         {
-
-
+           
             var user = new Occupants
             {
                 FullName = fullName,

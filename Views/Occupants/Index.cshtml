@@ -17,6 +17,10 @@
         {
             initials += items.Substring(0, 1).ToUpper();
         }
+        char fInitial = initials[0];
+        char lInitial = initials[initials.Length - 1];
+        string combInitial = fInitial.ToString()+lInitial.ToString(); 
+
         @using (Html.BeginForm("Delete", "Occupants", FormMethod.Post, new { 
             @name = "Form4" }))
             {
@@ -24,14 +28,27 @@
                     <div class="card bg-secondary mb-3">
                         <div class="card-body">
                             <center>
-                        <div class="initial-avatar">@initials</div><br>
+                        <div class="initial-avatar">@combInitial</div><br>
                                
 
                           
                             <h6 class="card-title"><strong>@item.FullName</strong></h6>
                            
                             </center>
-                             <p class="card-text"><strong>Plate Number:</strong>@item.PlateNumber<br /><strong>Contact Number:</strong><br />@item.ContactNumber<br /><strong>Vehicle:</strong>@item.Vehicle</p>
+                             <p class="card-text">
+                                @if (!string.IsNullOrEmpty(item.PlateNumber))
+                                {
+                                    <strong>Plate Number:</strong>
+                                    @item.PlateNumber
+                                    <br />
+                                }
+
+                                 <strong>Contact Number:</strong>
+                                <br />@item.ContactNumber
+                                <br />
+
+                                <strong>Vehicle:</strong>
+                                @item.Vehicle</p>
                     
                         </div>
                         <div class="card-footer">
@@ -68,9 +85,10 @@
                 {
                     <div class="form-group">
                         <input type="text" class="form-control" id="fullName" placeholder="Full Name" style="width:80%;" required><br />
+                        
                         <input type="text" class="form-control" id="plateNumber" placeholder="Plate Number" style="width:80%;" required><br />
                         <input type="number" class="form-control" id="contactNumber" placeholder="Contact Number" style="width:80%;" required><br />
-                        <label for="exampleSelect1" class="form-label mt-4">Vehicle Type:</label>
+                        <label for="exampleSelect1"  class="form-label mt-4">Vehicle Type:</label>
                             <select class="form-select" id="vehicleType" style="width:80%;">
                             <option>Car</option>
                             <option>Motorcycle</option>
@@ -116,7 +134,7 @@
                         <div class="form-group">
                             <strong>Full Name</strong>
                             <input type="text" class="form-control" id="fullNameEdit" placeholder="Full Name" style="width:80%;" required><br />
-                            <strong>Plate Number</strong>
+                            <strong id="plateNumberEditText">Plate Number</strong>
                             <input type="text" class="form-control" id="plateNumberEdit" placeholder="Plate Number" style="width:80%;" required><br />
                             <strong>Contact Number</strong>
                             <input type="number" class="form-control" id="contactNumberEdit" placeholder="Contact Number" style="width:80%;" required><br />
@@ -128,6 +146,7 @@
                             </select>
                         </div>
                     @Html.Hidden("fullNameOriginal", null , new{id = "hfFullNameOriginal"})
+                    @Html.Hidden("plateNumberOriginal", null , new{id = "hfPlateNumberOriginal"})
                     @Html.Hidden("fullnameEdit", null , new{id = "hfFullNameEdit"})
                     @Html.Hidden("platenumberEdit", null , new{id = "hfPlateNumberEdit"})
                     @Html.Hidden("contactnumberEdit", null , new{id = "hfContactNumberEdit"})
@@ -187,6 +206,7 @@
         var contactNumberEdit = detailsArr[1];
         var plateNumberEdit = detailsArr[2];
         var vehicleTypeEdit = detailsArr[3];
+        $("#hfPlateNumberOriginal").val(plateNumberEdit);
         $("#hfFullNameOriginal").val(fullNameEdit);
         $("#fullNameEdit").val(fullNameEdit);
         $("#plateNumberEdit").val(plateNumberEdit);
@@ -261,39 +281,45 @@
         var contactnumber = $("#contactNumberEdit").val();
          var orig = $("#hfFullNameOriginal").val();
         
-        if (fullname && contactnumber && platenumber) {
-            var validPhone = /^\d{11}$/;
-            if (contactnumber.match(validPhone)) {
-                swal({
-                    title: "Edit this Occupant?",
-                    text: " ",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
+     
+        if (fullname && contactnumber) {
+            if(vehicle == "Bicycle" && platenumber == "" || vehicle != "Bicycle" && platenumber != ""){
+                var validPhone = /^\d{11}$/;
+                if (contactnumber.match(validPhone)) {
+                    swal({
+                        title: "Edit this Occupant?",
+                        text: " ",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
 
-                            $("#hfFullNameEdit").val(fullname);
-                            $("#hfContactNumberEdit").val(contactnumber);
-                            $("#hfVehicleTypeEdit").val(vehicle);
-                            $("#hfPlateNumberEdit").val(platenumber);
-                           
-                           
-                            go = setTimeout(editUser);
+                                $("#hfFullNameEdit").val(fullname);
+                                $("#hfContactNumberEdit").val(contactnumber);
+                                $("#hfVehicleTypeEdit").val(vehicle);
+                                $("#hfPlateNumberEdit").val(platenumber);
 
-                        } else {
-                            swal("Changes not saved!");
-                        }
-                    });
-            } else {
-                swal("Input valid phone number", " ", "error");
+
+                                go = setTimeout(editUser);
+
+                            } else {
+                                swal("Changes not saved!");
+                            }
+                        });
+                } else {
+                    swal("Input valid phone number", " ", "error");
+                }
+            }else{
+                swal("Please fill all forms", " ", "error");
             }
 
 
         } else {
             swal("Please fill all forms", " ", "error");
         }
+       
 
     });
 
@@ -378,6 +404,41 @@
             }
         })
     });
+
+    $("body").on("change", "#vehicleType", function () {
+
+
+        var selected = $(this).find("option:selected").text();
+        const platenumber = document.getElementById('plateNumber');
+        if(selected == "Bicycle"){
+            platenumber.style.display = 'none';
+        }else{
+            platenumber.style.display = 'block';
+        }
+
+    });
+
+       $("body").on("change", "#vehicleTypeEdit", function () {
+
+
+        var selected = $(this).find("option:selected").text();
+        const platenumber = document.getElementById('plateNumberEdit');
+        const platenumberText = document.getElementById('plateNumberEditText');
+        var originalPlateNumber = $("#hfPlateNumberOriginal").val();
+
+        if(selected == "Bicycle"){
+            $("#plateNumberEdit").val("");
+            platenumber.style.display = 'none';
+             platenumberText.style.display = 'none';
+        }else{
+            $("#plateNumberEdit").val(originalPlateNumber);
+            platenumber.style.display = 'block';
+            platenumberText.style.display = 'block';
+        }
+
+    });
+
+
 
 
 </script>
