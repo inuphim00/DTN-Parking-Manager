@@ -235,31 +235,35 @@
                 var vehicle = $("#vehicleType").val();
                 var platenumber = $("#plateNumber").val();
                 var contactnumber = $("#contactNumber").val();
-                if (fullname && contactnumber && platenumber) {
-                    var validPhone = /^\d{11}$/;
-                    if (contactnumber.match(validPhone)) {
-                        swal({
-                            title: "Register a " + vehicle,
-                            text: "under the name of " + fullname,
-                            icon: "warning",
-                            buttons: true,
-                            dangerMode: true,
-                        })
-                            .then((willDelete) => {
-                                if (willDelete) {
+                if (fullname && contactnumber) {
+                    if (vehicle == "Bicycle" && platenumber == "" || vehicle != "Bicycle" && platenumber != "") {
+                        var validPhone = /^\d{11}$/;
+                        if (contactnumber.match(validPhone)) {
+                            swal({
+                                title: "Register a " + vehicle,
+                                text: "under the name of " + fullname,
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
 
-                                    $("#hfFullName").val(fullname);
-                                    $("#hfContactNumber").val(contactnumber);
-                                    $("#hfVehicleType").val(vehicle);
-                                    $("#hfPlateNumber").val(platenumber);
-                                    go = setTimeout(register);
+                                        $("#hfFullName").val(fullname);
+                                        $("#hfContactNumber").val(contactnumber);
+                                        $("#hfVehicleType").val(vehicle);
+                                        $("#hfPlateNumber").val(platenumber);
+                                        go = setTimeout(register);
 
-                                } else {
-                                    swal("Changes not saved!");
-                                }
-                            });
+                                    } else {
+                                        swal("Changes not saved!");
+                                    }
+                                });
+                        } else {
+                            swal("Input valid phone number", " ", "error");
+                        }
                     } else {
-                        swal("Input valid phone number", " ", "error");
+                        swal("Please fill all forms", " ", "error");
                     }
 
 
