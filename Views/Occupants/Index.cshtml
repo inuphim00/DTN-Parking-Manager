@@ -134,10 +134,12 @@
                         <div class="form-group">
                             <strong>Full Name</strong>
                             <input type="text" class="form-control" id="fullNameEdit" placeholder="Full Name" style="width:80%;" required><br />
+                            
                             <strong id="plateNumberEditText">Plate Number</strong>
                             <input type="text" class="form-control" id="plateNumberEdit" placeholder="Plate Number" style="width:80%;" required><br />
                             <strong>Contact Number</strong>
                             <input type="number" class="form-control" id="contactNumberEdit" placeholder="Contact Number" style="width:80%;" required><br />
+                           
                             <strong>Vehicle </strong>
                             <select class="form-select" id="vehicleTypeEdit" style="width:80%;">
                                 <option>Car</option>
@@ -213,6 +215,17 @@
         $("#contactNumberEdit").val(contactNumberEdit);
         $("#vehicleTypeEdit").val(vehicleTypeEdit);
         modalEdit.style.display = "block";
+
+
+        const platenumber = document.getElementById('plateNumberEdit');
+        const platenumberText = document.getElementById('plateNumberEditText');
+        if (vehicleTypeEdit == "Bicycle") {
+            platenumber.style.display = 'none';
+            platenumberText.style.display = 'none';
+        } else {
+            platenumber.style.display = 'block';
+            platenumberText.style.display = 'block';
+        }
     });
     spanEdit.onclick = function () {
         modalEdit.style.display = "none";
@@ -229,48 +242,49 @@
 
          let occupants = document.querySelectorAll('h6.card-title');
         occupants.forEach(occupants => {
-            if (occupants.textContent.includes(fullname)) {
-               swal("User already exist!", " A vehicle instance of this user already exist, try a different name", "error");
-            } else {
                 var vehicle = $("#vehicleType").val();
                 var platenumber = $("#plateNumber").val();
                 var contactnumber = $("#contactNumber").val();
                 if (fullname && contactnumber) {
                     if (vehicle == "Bicycle" && platenumber == "" || vehicle != "Bicycle" && platenumber != "") {
-                        var validPhone = /^\d{11}$/;
-                        if (contactnumber.match(validPhone)) {
-                            swal({
-                                title: "Register a " + vehicle,
-                                text: "under the name of " + fullname,
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            })
-                                .then((willDelete) => {
-                                    if (willDelete) {
+                        if (occupants.textContent.includes(fullname)) {
+                            swal("User already exist!", " A vehicle instance of this user already exist, try a different name", "error");
+                        }else{
+                            var validPhone = /^\d{11}$/;
+                            if (contactnumber.match(validPhone)) {
+                                swal({
+                                    title: "Register a " + vehicle,
+                                    text: "under the name of " + fullname,
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true,
+                                })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
 
-                                        $("#hfFullName").val(fullname);
-                                        $("#hfContactNumber").val(contactnumber);
-                                        $("#hfVehicleType").val(vehicle);
-                                        $("#hfPlateNumber").val(platenumber);
-                                        go = setTimeout(register);
+                                            $("#hfFullName").val(fullname);
+                                            $("#hfContactNumber").val(contactnumber);
+                                            $("#hfVehicleType").val(vehicle);
+                                            $("#hfPlateNumber").val(platenumber);
+                                            go = setTimeout(register);
 
-                                    } else {
-                                        swal("Changes not saved!");
-                                    }
-                                });
-                        } else {
-                            swal("Input valid phone number", " ", "error");
+                                        } else {
+                                            swal("Changes not saved!");
+                                        }
+                                    });
+                            } else {
+                                swal("Input valid phone number", " ", "error");
+                            }
                         }
                     } else {
                         swal("Please fill all forms", " ", "error");
                     }
 
-
                 } else {
                     swal("Please fill all forms", " ", "error");
                 }
-            }
+            
+
         });
 
        
@@ -283,9 +297,9 @@
         var vehicle = $("#vehicleTypeEdit").val();
         var platenumber = $("#plateNumberEdit").val();
         var contactnumber = $("#contactNumberEdit").val();
-         var orig = $("#hfFullNameOriginal").val();
+        var orig = $("#hfFullNameOriginal").val();
         
-     
+        
         if (fullname && contactnumber) {
             if(vehicle == "Bicycle" && platenumber == "" || vehicle != "Bicycle" && platenumber != ""){
                 var validPhone = /^\d{11}$/;
