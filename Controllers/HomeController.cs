@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DtnParkingSystem.Interface;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TestParkingSystem.Interface;
 using TestParkingSystem.Models;
@@ -10,12 +11,12 @@ namespace TestParkingSystem.Controllers
     {
 
 
-        private ParkingDetails _parkingDetails;
+        private IParkingDetails _parkingDetails;
         private readonly IGetParkingDetails _getParkingDetails;
         private readonly IManageParkingSpaces _manageParkingSpace;
 
 
-        public HomeController(IGetParkingDetails getParkingDetails, IManageParkingSpaces manageParkingSpace, ParkingDetails parkingDetails)
+        public HomeController(IGetParkingDetails getParkingDetails, IManageParkingSpaces manageParkingSpace, IParkingDetails parkingDetails)
         {
             _getParkingDetails = getParkingDetails;
             _manageParkingSpace = manageParkingSpace;
@@ -32,10 +33,8 @@ namespace TestParkingSystem.Controllers
             _parkingDetails.ParkingSpaces = floorSpaces.Result;
             _parkingDetails.Occupants = occupantDetails;
 
-            ViewBag.OccupantsAvailable = _getParkingDetails.GetFilteredList().Result;
             ViewBag.CarList = _getParkingDetails.GetCarFilteredList().Result;
             ViewBag.MotorBikeList = _getParkingDetails.GetMotorOrBikeFilteredList().Result;
-
             ViewBag.AllFloors = _getParkingDetails.GetAllFloorSpaces().Result;
 
 

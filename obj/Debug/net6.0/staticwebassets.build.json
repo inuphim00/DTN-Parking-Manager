@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8VQYeFB/DGja8Rh6zPLGppQFNaVJYgizG3crRAy0nHw=",
+  "Hash": "wnz2bGbWXFvfcAUysBkvrK1mauDkXG1XriBuzWF6sI4=",
   "Source": "DtnParkingSystem",
   "BasePath": "_content/DtnParkingSystem",
   "Mode": "Default",
@@ -1001,6 +1001,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\wwwroot\\loaderimage.gif",
+      "SourceId": "DtnParkingSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\wwwroot\\",
+      "BasePath": "_content/DtnParkingSystem",
+      "RelativePath": "loaderimage.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\loaderimage.gif"
     },
     {
       "Identity": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\wwwroot\\navbaricon.png",

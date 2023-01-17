@@ -1,6 +1,8 @@
-﻿namespace TestParkingSystem.Models
+﻿using DtnParkingSystem.Interface;
+
+namespace TestParkingSystem.Models
 {
-    public class ParkingDetails
+    public class ParkingDetails : IParkingDetails
     {
         public IEnumerable<ParkingSpaces> ParkingSpaces { get; set; } = Enumerable.Empty<ParkingSpaces>();
         public IEnumerable<Occupants> Occupants { get; set; } = Enumerable.Empty<Occupants>();

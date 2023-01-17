@@ -6,7 +6,6 @@ using TestParkingSystem.Interface;
 using TestParkingSystem.Models;
 using TestParkingSystem.Services;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -34,6 +33,7 @@ builder.Services.AddSingleton(_ => new OccupantsDAO(
 builder.Services.AddScoped<IManageParkingSpaces, ManageParkingSpace>();
 builder.Services.AddScoped<IGetParkingDetails, GetParkingDetails>();
 builder.Services.AddScoped<IManageOccupants, ManageOccupants>();
+builder.Services.AddTransient<IParkingDetails, ParkingDetails>();
 
 
 

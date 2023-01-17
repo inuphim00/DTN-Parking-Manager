@@ -229,6 +229,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\wwwroot\\loaderimage.gif",
+      "PackagePath": "staticwebassets\\loaderimage.gif"
+    },
+    {
       "Id": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\wwwroot\\navbaricon.png",
       "PackagePath": "staticwebassets\\navbaricon.png"
     },

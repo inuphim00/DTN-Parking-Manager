@@ -8,6 +8,7 @@
 
   
 <div class="container d-flex flex-wrap" style="width:100%;">
+
         @foreach (var item in Model)
         {
          string[] nameSplit = item.FullName.Split(new string[] { "," , " "}, StringSplitOptions.RemoveEmptyEntries);
@@ -420,6 +421,7 @@
             }else{
                 occupants.parentNode.parentNode.parentNode.parentNode.style.display = 'none' 
             }
+            
         })
     });
 
