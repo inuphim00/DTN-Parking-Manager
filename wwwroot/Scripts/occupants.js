@@ -63,20 +63,17 @@ window.onclick = function (event) {
 
 
 //register user function 
-$("body").on("click", "#ddlSubmit", function () {
-    var fullname = $("#fullName").val();
+$("#ddlSubmit").bind("click", function () {
 
-    let occupants = document.querySelectorAll('h6.card-title');
-
-     occupants.forEach(occupants => 
-     {
+    let occupantslist = document.querySelectorAll('h6.card-title');
+     occupantslist.forEach(occupantslist => {
+            var fullname = $("#fullName").val();
             var vehicle = $("#vehicleType").val();
             var platenumber = $("#plateNumber").val();
             var contactnumber = $("#contactNumber").val();
             if (fullname && contactnumber) {
                 if (vehicle == "Bicycle" && platenumber == "" || vehicle != "Bicycle" && platenumber != "") {
-                
-                    if (occupants.textContent.includes(fullname)) {
+                    if (occupantslist.textContent.toLowerCase().includes(fullname.toLowerCase())) {
                         swal("User already exist!", " A vehicle instance of this user already exist, try a different name", "error");
                     } else {
                     
@@ -124,6 +121,8 @@ $("body").on("click", "#ddlSubmit", function () {
 
 
 });
+
+
 //end of register user function
 //edit user function
 $("body").on("click", "#ddlSubmitEdit", function () {

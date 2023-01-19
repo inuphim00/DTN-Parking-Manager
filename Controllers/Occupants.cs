@@ -40,5 +40,6 @@ namespace DtnParkingSystem.Controllers
             _manageOccupants.Delete(formCollection["userToDelete"]);
             return RedirectToAction("Index");
         }
+
     }
 }

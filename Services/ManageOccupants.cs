@@ -1,5 +1,6 @@
 ﻿using DtnParkingSystem.Interface;
 using DtnParkingSystem.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DtnParkingSystem.Services
 {
@@ -16,7 +17,8 @@ namespace DtnParkingSystem.Services
         {
             try
             {
-                if (!string.IsNullOrEmpty(fullName) && !string.IsNullOrEmpty(contactNumber) && !string.IsNullOrEmpty(vehicleType))
+                var validate = Validate(fullName, contactNumber, plateNumber, vehicleType).Result;
+                if (validate == "Success")
                 {
                     var user = new Occupants
                     {
@@ -31,7 +33,7 @@ namespace DtnParkingSystem.Services
                 }
                 else
                 {
-                    return ("Please fill all fields");
+                    return (validate);
                 }
             }
             catch(Exception ex)
@@ -41,26 +43,35 @@ namespace DtnParkingSystem.Services
   
         }
 
+
         public async Task<string> EditUser(string fullName, string contactNumber, string plateNumber, string vehicleType, string originalName)
         {
             try
             {
+                var validate = Validate(fullName, contactNumber, plateNumber, vehicleType).Result;
                 if (!string.IsNullOrEmpty(fullName) && !string.IsNullOrEmpty(contactNumber) && !string.IsNullOrEmpty(vehicleType))
                 {
-                    var user = new Occupants
+                    if (validate == "Success")
                     {
-                        FullName = fullName,
-                        ContactNumber = contactNumber,
-                        PlateNumber = plateNumber,
-                        Vehicle = vehicleType
-                    };
+                        var user = new Occupants
+                        {
+                            FullName = fullName,
+                            ContactNumber = contactNumber,
+                            PlateNumber = plateNumber,
+                            Vehicle = vehicleType
+                        };
 
-                    if (fullName != originalName)
-                    {
-                        _occupantsDAO.DeleteUser(originalName);
+                        if (fullName != originalName)
+                        {
+                            _occupantsDAO.DeleteUser(originalName);
+                        }
+                        await _occupantsDAO.AddOrUpdate(user, fullName, default(CancellationToken));
+                        return ("Success");
                     }
-                    await _occupantsDAO.AddOrUpdate(user, fullName, default(CancellationToken));
-                    return ("Success");
+                    else
+                    {
+                        return (validate);
+                    }
                 }
                 else
                 {
@@ -70,8 +81,8 @@ namespace DtnParkingSystem.Services
             {
                 return ("Error: " + ex);
             }
+        
         }
-
         public string Delete(string fullName)
         {
             try
@@ -83,6 +94,34 @@ namespace DtnParkingSystem.Services
             {
                 return ("Error: " + ex);
             }
+        }
+
+        public async Task<string> Validate(string fullName, string contactNumber, string plateNumber, string vehicleType)
+        {
+            if (!string.IsNullOrEmpty(fullName) && !string.IsNullOrEmpty(contactNumber) && !string.IsNullOrEmpty(vehicleType))
+            {
+
+                var allOccupants = await _occupantsDAO.GetAll<Occupants>(default);
+                foreach (var docs in allOccupants)
+                {
+                    if (docs.FullName == fullName)
+                    {
+                        return ("User already exist");
+                    }
+                    else if (docs.PlateNumber == plateNumber)
+                    {
+                        return ("Plate number already exist");
+                    }
+
+                }
+            
+                return ("Success");
+            }
+            else
+            {
+                return ("Please fill all fields");
+            }
+
         }
     }
 }
