@@ -1,6 +1,6 @@
 ﻿using Google.Cloud.Firestore;
 
-namespace TestParkingSystem.Models
+namespace DtnParkingSystem.Models
 {
 	[FirestoreData]
 	public class Occupants

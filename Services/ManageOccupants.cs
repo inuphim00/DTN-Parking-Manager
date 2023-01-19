@@ -1,63 +1,88 @@
 ﻿using DtnParkingSystem.Interface;
-using TestParkingSystem.Models;
-using TestParkingSystem.Services;
+using DtnParkingSystem.Models;
 
 namespace DtnParkingSystem.Services
 {
-    public class ManageOccupants : IManageOccupants
+	public class ManageOccupants : IManageOccupants
     {
-        private readonly OccupantsDAO _occupantsDAO;
+        private readonly IOccupantsDAO _occupantsDAO;
 
-        public ManageOccupants(OccupantsDAO occupantsDAO)
+        public ManageOccupants(IOccupantsDAO occupantsDAO)
         {
             _occupantsDAO = occupantsDAO;
         }
 
-        public async void Register(string fullName, string contactNumber, string plateNumber, string vehicleType)
+        public async Task<string>Register(string fullName, string contactNumber, string plateNumber, string vehicleType)
         {
-
-
-            var user = new Occupants
+            try
             {
-                FullName = fullName,
-                ContactNumber = contactNumber,
-                PlateNumber = plateNumber,
-                Vehicle = vehicleType
-            };
+                if (!string.IsNullOrEmpty(fullName) && !string.IsNullOrEmpty(contactNumber) && !string.IsNullOrEmpty(vehicleType))
+                {
+                    var user = new Occupants
+                    {
+                        FullName = fullName,
+                        ContactNumber = contactNumber,
+                        PlateNumber = plateNumber,
+                        Vehicle = vehicleType
+                    };
 
-            await _occupantsDAO.AddOrUpdate(user, fullName, default(CancellationToken));
-
-
-
+                    await _occupantsDAO.AddOrUpdate(user, fullName, default(CancellationToken));
+                    return ("Success");
+                }
+                else
+                {
+                    return ("Please fill all fields");
+                }
+            }
+            catch(Exception ex)
+            {
+                return ("Error:" + ex);
+            }
+  
         }
 
         public async Task<string> EditUser(string fullName, string contactNumber, string plateNumber, string vehicleType, string originalName)
         {
-           
-            var user = new Occupants
+            try
             {
-                FullName = fullName,
-                ContactNumber = contactNumber,
-                PlateNumber = plateNumber,
-                Vehicle = vehicleType
-            };
+                if (!string.IsNullOrEmpty(fullName) && !string.IsNullOrEmpty(contactNumber) && !string.IsNullOrEmpty(vehicleType))
+                {
+                    var user = new Occupants
+                    {
+                        FullName = fullName,
+                        ContactNumber = contactNumber,
+                        PlateNumber = plateNumber,
+                        Vehicle = vehicleType
+                    };
 
-            if (fullName != originalName)
+                    if (fullName != originalName)
+                    {
+                        _occupantsDAO.DeleteUser(originalName);
+                    }
+                    await _occupantsDAO.AddOrUpdate(user, fullName, default(CancellationToken));
+                    return ("Success");
+                }
+                else
+                {
+                    return ("Please fill all fields");
+                }
+            }catch(Exception ex)
             {
-                _occupantsDAO.DeleteUser(originalName);
+                return ("Error: " + ex);
             }
-
-            await _occupantsDAO.AddOrUpdate(user, fullName, default(CancellationToken));
-            return ("Success");
-
-
-
         }
 
-        public void Delete(string fullName)
+        public string Delete(string fullName)
         {
-
-            _occupantsDAO.DeleteUser(fullName);
+            try
+            {
+                _occupantsDAO.DeleteUser(fullName);
+                return ("Success");
+            }
+            catch(Exception ex)
+            {
+                return ("Error: " + ex);
+            }
         }
     }
 }

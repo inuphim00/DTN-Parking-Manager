@@ -1,12 +1,10 @@
 ﻿using Google.Cloud.Firestore;
 
-namespace TestParkingSystem.Models
+namespace DtnParkingSystem.Models
 {
 	[FirestoreData]
 	public class ParkingSpaces
 	{
-
-
 
 		[FirestoreProperty]
 		public string Occupant { get; set; } = string.Empty;
@@ -19,7 +17,6 @@ namespace TestParkingSystem.Models
 
 		[FirestoreProperty]
 		public string SlotType { get; set; } = string.Empty;
-
 
 		[FirestoreProperty]
 		public string Floor { get; set; } = string.Empty;

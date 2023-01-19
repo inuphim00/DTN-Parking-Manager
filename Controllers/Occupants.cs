@@ -1,10 +1,9 @@
 ﻿using DtnParkingSystem.Interface;
 using Microsoft.AspNetCore.Mvc;
-using TestParkingSystem.Interface;
 
 namespace DtnParkingSystem.Controllers
 {
-    public class Occupants : Controller
+	public class Occupants : Controller
     {
         private readonly IManageOccupants _manageOccupants;
         private readonly IGetParkingDetails _getParkingDetails;
@@ -24,28 +23,22 @@ namespace DtnParkingSystem.Controllers
         [Route("Register")]
         public IActionResult Register([FromForm] IFormCollection formCollection)
         {
-
-            _manageOccupants.Register(formCollection["fullname"], formCollection["contactnumber"], formCollection["platenumber"], formCollection["vehicleType"]);
+            
+            TempData["Message"] = _manageOccupants.Register(formCollection["fullname"], formCollection["contactnumber"], formCollection["platenumber"], formCollection["vehicleType"]).Result;
             return RedirectToAction("Index");
         }
-
         [ActionName("EditUser")]
         [Route("EditUser")]
         public IActionResult EditUser([FromForm] IFormCollection formCollection)
         {
-
-
             TempData["Message"] = _manageOccupants.EditUser(formCollection["fullnameEdit"], formCollection["contactnumberEdit"], formCollection["platenumberEdit"], formCollection["vehicleTypeEdit"], formCollection["fullNameOriginal"]).Result;
             return RedirectToAction("Index");
         }
-
-
 
         [ActionName("Delete")]
         [Route("Delete")]
         public IActionResult Delete([FromForm] IFormCollection formCollection)
         {
-
             _manageOccupants.Delete(formCollection["userToDelete"]);
             return RedirectToAction("Index");
         }

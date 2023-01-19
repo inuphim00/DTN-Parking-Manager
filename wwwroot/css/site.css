@@ -204,6 +204,20 @@ body {
             cursor: pointer;
         }
 
+.closeEdit {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .closeEdit:hover,
+    .closeEdit:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
     .modal-header {
         padding: 2px 16px;
         background-color: #5cb85c;

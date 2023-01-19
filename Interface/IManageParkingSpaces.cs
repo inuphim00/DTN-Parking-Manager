@@ -1,10 +1,9 @@
-﻿namespace TestParkingSystem.Interface
+﻿namespace DtnParkingSystem.Interface
 {
-    public interface IManageParkingSpaces
-    {
-        public Task<string> Validate(string slotNumber, string occupant, string floor, string vehicleType);
-        public void Occupy(string slotNumber, string occupant, string floor, string vehicleType);
-        public void FreeSpace(string slotNumber, string occupant, string floor, string vehicleType);
+	public interface IManageParkingSpaces
+	{
+		public Task<string> Occupy(string slotNumber, string occupant, string floor, string vehicleType);
+		public Task<string> FreeSpace(string slotNumber, string occupant, string floor, string vehicleType);
 
-    }
+	}
 }

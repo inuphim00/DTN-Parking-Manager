@@ -1,43 +1,38 @@
-﻿using Google.Cloud.Firestore;
-using TestParkingSystem.Models;
+﻿using DtnParkingSystem.Interface;
+using DtnParkingSystem.Models;
+using Google.Cloud.Firestore;
 
-namespace TestParkingSystem.Services
+namespace DtnParkingSystem.Services
 {
-    public class ParkingSpaceDAO
-    {
+	public class ParkingSpaceDAO : IParkingSpaceDAO
+	{
 
-        private readonly FirestoreDb _fireStoreDb = null!;
+        private FirestoreDb _fireStoreDb = FirestoreDb.Create("dtn-parking-manager");
 
-        public ParkingSpaceDAO(FirestoreDb fireStoreDb)
-        {
-            _fireStoreDb = fireStoreDb;
-        }
+        public async Task AddOrUpdate<ParkingSpaces>(string floor, ParkingSpaces entity, string slot, CancellationToken ct)
+		{
+			var document = _fireStoreDb.Collection(typeof(ParkingSpaces).Name).Document(floor).Collection("slots").Document(slot);
+			await document.SetAsync(entity, cancellationToken: ct);
 
-        public async Task AddOrUpdate<T>(string floor, T entity, string slot, CancellationToken ct) where T : ParkingSpaces
-        {
-            var document = _fireStoreDb.Collection(typeof(T).Name).Document(floor).Collection("slots").Document(slot);
-            await document.SetAsync(entity, cancellationToken: ct);
+		}
 
-        }
+		public async Task<IReadOnlyCollection<ParkingSpaces>> GetSubCollection<ParkingSpaces>(string id, CancellationToken ct)
+		{
+			var collection = _fireStoreDb.Collection(typeof(ParkingSpaces).Name).Document(id).Collection("slots");
+			var snapshot = await collection.GetSnapshotAsync(ct);
+			return snapshot.Documents.Select(x => x.ConvertTo<ParkingSpaces>()).ToList();
+		}
 
-        public async Task<IReadOnlyCollection<T>> GetSubCollection<T>(string id, CancellationToken ct) where T : ParkingSpaces
-        {
-            var collection = _fireStoreDb.Collection(typeof(T).Name).Document(id).Collection("slots");
-            var snapshot = await collection.GetSnapshotAsync(ct);
-            return snapshot.Documents.Select(x => x.ConvertTo<T>()).ToList();
-        }
+		public async Task<IReadOnlyCollection<string>> GetDocuments<ParkingSpaces>(CancellationToken ct) { 
+			var collection = _fireStoreDb.Collection(typeof(ParkingSpaces).Name);
 
-        public async Task<IReadOnlyCollection<string>> GetDocuments<T>(CancellationToken ct) where T : ParkingSpaces
-        {
-            var collection = _fireStoreDb.Collection(typeof(T).Name);
-
-            var snapshot = await collection.GetSnapshotAsync();
-            var AllFloors = new List<string> { };
-            foreach (DocumentSnapshot docSnap in snapshot.Documents)
-            {
-                AllFloors.Add(docSnap.Id);
-            }
-            return AllFloors;
-        }
-    }
+			var snapshot = await collection.GetSnapshotAsync();
+			var AllFloors = new List<string> { };
+			foreach (DocumentSnapshot docSnap in snapshot.Documents)
+			{
+				AllFloors.Add(docSnap.Id);
+			}
+			return AllFloors;
+		}
+	}
 }

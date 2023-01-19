@@ -1,10 +1,8 @@
 using DtnParkingSystem.Interface;
+using DtnParkingSystem.Models;
 using DtnParkingSystem.Services;
 using Google.Cloud.Firestore;
 using System.Text.Json;
-using TestParkingSystem.Interface;
-using TestParkingSystem.Models;
-using TestParkingSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,35 +12,15 @@ builder.Services.AddControllersWithViews();
 var firebaseJson = JsonSerializer.Serialize(new FirebaseSettings());
 var firebaseSettings = new FirebaseSettings();
 
-builder.Services.AddSingleton(_ => new ParkingSpaceDAO(
-	new FirestoreDbBuilder
-	{
-		ProjectId = firebaseSettings.ProjectId,
-		JsonCredentials = firebaseJson
-	}.Build()
-));
-
-
-builder.Services.AddSingleton(_ => new OccupantsDAO(
-	new FirestoreDbBuilder
-	{
-		ProjectId = firebaseSettings.ProjectId,
-		JsonCredentials = firebaseJson
-	}.Build()
-));
 builder.Services.AddScoped<IManageParkingSpaces, ManageParkingSpace>();
 builder.Services.AddScoped<IGetParkingDetails, GetParkingDetails>();
 builder.Services.AddScoped<IManageOccupants, ManageOccupants>();
 builder.Services.AddTransient<IParkingDetails, ParkingDetails>();
+builder.Services.AddScoped<IOccupantsDAO, OccupantsDAO>();
+builder.Services.AddScoped<IParkingSpaceDAO, ParkingSpaceDAO>();
 
-
-
-
-
-
-
-builder.Services.AddScoped<ParkingDetails, ParkingDetails>();
-
+string path = AppDomain.CurrentDomain.BaseDirectory + @"dtnparkingmanager.json";
+Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
 
 
 var app = builder.Build();

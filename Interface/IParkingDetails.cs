@@ -1,8 +1,8 @@
-﻿using TestParkingSystem.Models;
+﻿using DtnParkingSystem.Models;
 
 namespace DtnParkingSystem.Interface
 {
-    public interface IParkingDetails
+	public interface IParkingDetails
     {
         public IEnumerable<ParkingSpaces> ParkingSpaces { get; set; }
         public IEnumerable<Occupants> Occupants { get; set; }

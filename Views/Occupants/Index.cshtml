@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TestParkingSystem.Models.Occupants>
+﻿@model IEnumerable<Occupants>
 
     <br />
     <center>
@@ -76,9 +76,6 @@
         <div class="modal-header">
             <h5>Add new Vehicle</h5>
         <span class="close">&times;</span>
-
-
-
         </div>
         <center>
             <div class="modal-body">
@@ -123,7 +120,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <h5>Edit User</h5>
-            <span class="closeEdit">&times;</span>
+        <span class="closeEdit">&times;</span>
 
 
 
@@ -241,42 +238,46 @@
     $("body").on("click", "#ddlSubmit", function () {
         var fullname = $("#fullName").val();
 
-         let occupants = document.querySelectorAll('h6.card-title');
+        let occupants = document.querySelectorAll('h6.card-title');
         occupants.forEach(occupants => {
                 var vehicle = $("#vehicleType").val();
                 var platenumber = $("#plateNumber").val();
                 var contactnumber = $("#contactNumber").val();
                 if (fullname && contactnumber) {
                     if (vehicle == "Bicycle" && platenumber == "" || vehicle != "Bicycle" && platenumber != "") {
-                        if (occupants.textContent.includes(fullname)) {
-                            swal("User already exist!", " A vehicle instance of this user already exist, try a different name", "error");
-                        }else{
-                            var validPhone = /^\d{11}$/;
-                            if (contactnumber.match(validPhone)) {
-                                swal({
-                                    title: "Register a " + vehicle,
-                                    text: "under the name of " + fullname,
-                                    icon: "warning",
-                                    buttons: true,
-                                    dangerMode: true,
-                                })
-                                    .then((willDelete) => {
-                                        if (willDelete) {
+                            if (occupants.textContent.includes(fullname)) {
+                                swal("User already exist!", " A vehicle instance of this user already exist, try a different name", "error");
 
-                                            $("#hfFullName").val(fullname);
-                                            $("#hfContactNumber").val(contactnumber);
-                                            $("#hfVehicleType").val(vehicle);
-                                            $("#hfPlateNumber").val(platenumber);
-                                            go = setTimeout(register);
+                            }else{
+                                var validPhone = /^\d{11}$/;
+                                if (contactnumber.match(validPhone)) {
+                                    swal({
+                                        title: "Register a " + vehicle,
+                                        text: "under the name of " + fullname,
+                                        icon: "warning",
+                                        buttons: true,
+                                        dangerMode: true,
+                                    })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
 
-                                        } else {
-                                            swal("Changes not saved!");
-                                        }
-                                    });
-                            } else {
-                                swal("Input valid phone number", " ", "error");
+                                                $("#hfFullName").val(fullname);
+                                                $("#hfContactNumber").val(contactnumber);
+                                                $("#hfVehicleType").val(vehicle);
+                                                $("#hfPlateNumber").val(platenumber);
+                                                go = setTimeout(register);
+
+                                            } else {
+                                                swal("Changes not saved!");
+                                            }
+                                        });
+                                } else {
+                                    swal("Input valid phone number", " ", "error");
+                                }
                             }
-                        }
+
+                        
+
                     } else {
                         swal("Please fill all forms", " ", "error");
                     }
