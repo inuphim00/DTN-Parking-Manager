@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\DtnParkingSystem.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\wwwroot\\Scripts\\homescript.js",
+      "PackagePath": "staticwebassets\\Scripts\\homescript.js"
+    },
+    {
+      "Id": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\wwwroot\\Scripts\\occupants.js",
+      "PackagePath": "staticwebassets\\Scripts\\occupants.js"
+    },
+    {
       "Id": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

@@ -4,7 +4,7 @@ namespace DtnParkingSystem.Interface
 {
 	public interface IOccupantsDAO
 	{
-		 void DeleteUser(string fullName);
+		void DeleteUser(string fullName);
 
 		Task AddOrUpdate<Occupants>(Occupants entity, string fullName, CancellationToken ct);
 

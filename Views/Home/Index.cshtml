@@ -15,8 +15,6 @@
 	<div class="container d-flex flex-wrap">
 		<div style="display:none;" id="loader"></div>
 
-
-
 		@foreach (var parkingSpace in Model.ParkingSpaces)
 		{
 		
@@ -24,7 +22,6 @@
 			{
 				@if (string.IsNullOrEmpty(parkingSpace.Occupant))
 				{
-						
 						<div class="card text-white bg-success mb-3">
 							<div class="card-header"><strong>Slot: </strong>@parkingSpace.SlotNumber</div>
 							<div class="card-body">
@@ -42,7 +39,7 @@
 								</center>
 
 
-								if(parkingSpace.SlotType == "Car"){
+								if(parkingSpace.SlotType == "Cars"){
 									<h4 class="card-title">@Html.DropDownList(parkingSpace.SlotNumber+"|"+parkingSpace.Floor+"|"+parkingSpace.SlotType, new SelectList(ViewBag.CarList),"", new {id = "ddlOccupant", @class="js-example-responsive js-states form-control" ,style="width:100%;"})</h4>
 							}
 								else
@@ -122,94 +119,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="https://rawgit.com/select2/select2/4.0.5/dist/js/select2.full.min.js"></script>
 							
-<script type="text/javascript">
-	$('.js-example-responsive').select2({
-		placeholder: "Available",
-		allowClear: true
-	});
-	
-	var go;
-	$("body").on("change", "#ddlOccupant", function () {
-		
-					var floorAndSlot = this.getAttribute("name");
-					const floorAndSlotArr = floorAndSlot.split("|");
-					var slot = floorAndSlotArr[0];
-					var floor = floorAndSlotArr[1];
-					var vehicletype = floorAndSlotArr[2];
-
-					$("#hfSelectedOccupant").val($(this).find("option:selected").text());
-					$("#hfSlotNumber").val(slot);
-					$("#hfVehicleType").val(vehicletype);
-					var elements = document.getElementsByName('thisfloor');
-					var id = elements[0].getAttribute('id');
-					$("#hfFloor").val(floor);
-
-					go = setTimeout(showPage);
-
-		
-	
-	});
-
-
-
-	$("body").on("click", "#ddlFreeUp", function () {
-
-		swal({
-		  title: "Are you sure?",
-		  text: "you want to free up this parking space?",
-		  icon: "warning",
-		  buttons: true,
-		  dangerMode: true,
-		})
-		.then((willDelete) => {
-		  if (willDelete) {
-			  var floorAndSlot = this.getAttribute("name");
-				const floorAndSlotArr = floorAndSlot.split("|");
-				var slot = floorAndSlotArr[0];
-				var floor = floorAndSlotArr[1];
-				var vehicletype = floorAndSlotArr[2];
-
-				$("#hfSelectedOccupantFreeUp").val($(this).value);
-				$("#hfSlotNumberFreeUp").val(slot);
-				$("#hfVehicleTypeFreeUp").val(vehicletype);
-				$("#hfFloorFreeUp").val(floor);
-					go = setTimeout(freeUpPage);
-		  } else {
-			swal("Changes not saved!");
-		  }
-		});
-	});
-
-
-	function showPage() {
-		
-		swal({
-				title: "Occupying this slot...",
-				text:" ",
-                icon: "loaderimage.gif",
-                buttons: false,      
-                closeOnClickOutside: false,
-                timer: 90000,
-                //icon: "success"
-            });
-
-		document.forms["Form1"].submit();
-	}
-	function freeUpPage() {
-		swal({
-				title: "Freeing up this slot..",
-				text:" ",
-                icon: "loaderimage.gif",
-                buttons: false,      
-                closeOnClickOutside: false,
-                timer: 90000,
-                //icon: "success"
-            });
-
-		document.forms["Form2"].submit();
-	}
-
-
+<script type="text/javascript" src="Scripts/homescript.js">
 </script>
 
 @if (TempData["Message"] != null)

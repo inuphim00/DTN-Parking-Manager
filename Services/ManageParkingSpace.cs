@@ -20,7 +20,6 @@ namespace DtnParkingSystem.Services
 		{
 			try
 			{
-			
 					var slotnumber = slotNumber;
 					var thisDateTime = DateTime.UtcNow;
 					var specifiedDateTime = DateTime.SpecifyKind(thisDateTime, DateTimeKind.Utc);
@@ -57,6 +56,7 @@ namespace DtnParkingSystem.Services
 
 
 		}
+
 		public async Task<string>FreeSpace(string slotNumber, string occupant, string floor, string vehicleType)
 		{
 			try

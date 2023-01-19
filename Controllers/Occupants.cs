@@ -18,12 +18,10 @@ namespace DtnParkingSystem.Controllers
             var occupants = await _getParkingDetails.GetOccupant();
             return View(occupants);
         }
-
         [ActionName("Register")]
         [Route("Register")]
         public IActionResult Register([FromForm] IFormCollection formCollection)
-        {
-            
+        {     
             TempData["Message"] = _manageOccupants.Register(formCollection["fullname"], formCollection["contactnumber"], formCollection["platenumber"], formCollection["vehicleType"]).Result;
             return RedirectToAction("Index");
         }

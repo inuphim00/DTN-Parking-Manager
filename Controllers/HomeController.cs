@@ -21,14 +21,18 @@ namespace DtnParkingSystem.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var floorSpaces = _getParkingDetails.GetAllParkingSpaces();
+			var parkingSpaces = _getParkingDetails.GetAllParkingSpaces();
 			var occupantDetails = await _getParkingDetails.GetOccupant();
-			_parkingDetails.ParkingSpaces = floorSpaces.Result;
+			_parkingDetails.ParkingSpaces = parkingSpaces.Result;
 			_parkingDetails.Occupants = occupantDetails;
+
 			ViewBag.CarList = _getParkingDetails.GetCarFilteredList().Result;
 			ViewBag.MotorBikeList = _getParkingDetails.GetMotorOrBikeFilteredList().Result;
+
 			ViewBag.AllFloors = _getParkingDetails.GetAllFloorSpaces().Result;
+
 			return View(_parkingDetails);
+
 		}
 
 		[ActionName("FreeUp")]

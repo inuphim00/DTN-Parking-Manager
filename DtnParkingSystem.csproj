@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="wwwroot\Scripts\homescript.js" />
   </ItemGroup>
 
   <ItemGroup>
