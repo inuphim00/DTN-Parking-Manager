@@ -817,3 +817,6 @@ C:\Users\Phim\Documents\DtnParkingManager\obj\Debug\net6.0\scopedcss\projectbund
 C:\Users\Phim\Documents\DtnParkingManager\obj\Debug\net6.0\DtnParkingSystem.csproj.CopyComplete
 C:\Users\Phim\Documents\DtnParkingManager\obj\Debug\net6.0\DtnParkingSystem.genruntimeconfig.cache
 C:\Users\Phim\Documents\DtnParkingManager\obj\Debug\net6.0\ref\DtnParkingSystem.dll
+C:\Users\Phim\Documents\DtnParkingManager\bin\Debug\net6.0\Castle.Core.dll
+C:\Users\Phim\Documents\DtnParkingManager\bin\Debug\net6.0\Moq.dll
+C:\Users\Phim\Documents\DtnParkingManager\bin\Debug\net6.0\nunit.framework.dll
