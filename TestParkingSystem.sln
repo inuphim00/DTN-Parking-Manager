@@ -5,8 +5,6 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DtnParkingSystem", "DtnParkingSystem.csproj", "{ABA3311D-2F61-4D8F-BB20-AA16CA2EC572}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DtnParkingSystem.UnitTests", "..\DtnParkingSystem.UnitTests\DtnParkingSystem.UnitTests.csproj", "{6B87FF00-611F-49E8-B4BB-823426BE0F83}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{ABA3311D-2F61-4D8F-BB20-AA16CA2EC572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABA3311D-2F61-4D8F-BB20-AA16CA2EC572}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABA3311D-2F61-4D8F-BB20-AA16CA2EC572}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B87FF00-611F-49E8-B4BB-823426BE0F83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B87FF00-611F-49E8-B4BB-823426BE0F83}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B87FF00-611F-49E8-B4BB-823426BE0F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B87FF00-611F-49E8-B4BB-823426BE0F83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
