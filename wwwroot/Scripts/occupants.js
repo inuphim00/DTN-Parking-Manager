@@ -66,15 +66,18 @@ window.onclick = function (event) {
 $("#ddlSubmit").bind("click", function () {
 
     let occupantslist = document.querySelectorAll('h6.card-title');
-     occupantslist.forEach(occupantslist => {
+     
             var fullname = $("#fullName").val();
+          
             var vehicle = $("#vehicleType").val();
             var platenumber = $("#plateNumber").val();
-            var contactnumber = $("#contactNumber").val();
+        
+             var contactnumber = $("#contactNumber").val();
+   
             if (fullname && contactnumber) {
                 if (vehicle == "Bicycle" && platenumber == "" || vehicle != "Bicycle" && platenumber != "") {
-                    if (occupantslist.textContent.toLowerCase().includes(fullname.toLowerCase())) {
-                        swal("User already exist!", " A vehicle instance of this user already exist, try a different name", "error");
+                    if (fullname.length <=1) {
+                        swal("Invalid Name", " Name must be to or more characters", "error");
                     } else {
                     
                         var validPhone = /^\d{11}$/;
@@ -114,7 +117,7 @@ $("#ddlSubmit").bind("click", function () {
             } else {
                 swal("Please fill all forms", " ", "error");
             }
-      });
+
 
 
    

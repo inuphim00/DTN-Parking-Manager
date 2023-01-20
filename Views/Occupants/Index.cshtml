@@ -85,7 +85,7 @@
                         <input type="text" class="form-control" id="fullName" placeholder="Full Name" style="width:80%;" maxlength="30" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 32)"  onchange="UserCheck()"required><br />
                         <p id="Status"><p>
                         <input type="text" class="form-control" id="plateNumber" placeholder="Plate Number" style="width:80%;" maxlength="6" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 32)" required><br />
-                        <input type="number" class="form-control" id="contactNumber" placeholder="Contact Number" style="width:80%;" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxlength = "11" required><br />
+                            <input type="number" class="form-control" id="contactNumber" placeholder="Contact Number" style="width:80%;" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 32)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="11" required><br />
                         <label for="exampleSelect1"  class="form-label mt-4">Vehicle Type:</label>
                             <select class="form-select" id="vehicleType" style="width:80%;">
                             <option>Car</option>
@@ -136,7 +136,7 @@
                             <strong id="plateNumberEditText">Plate Number</strong>
                         <input type="text" class="form-control" id="plateNumberEdit" placeholder="Plate Number" style="width:80%;" maxlength="6" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 32)" required><br />
                             <strong>Contact Number</strong>
-                        <input type="number" class="form-control" id="contactNumberEdit" placeholder="Contact Number" style="width:80%;"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxlength = "11" required><br />
+                        <input type="number" class="form-control" id="contactNumberEdit" placeholder="Contact Number" style="width:80%;" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 32)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="11" required><br />
                            
                             <strong>Vehicle </strong>
                             <select class="form-select" id="vehicleTypeEdit" style="width:80%;">

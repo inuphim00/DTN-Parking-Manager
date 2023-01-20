@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Phim\\Documents\\DtnParkingManager\\DtnParkingSystem.csproj": {}
+    "C:\\Users\\Seraphim.Nombre\\Desktop\\dtnparkingmanager\\DtnParkingSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Phim\\Documents\\DtnParkingManager\\DtnParkingSystem.csproj": {
+    "C:\\Users\\Seraphim.Nombre\\Desktop\\dtnparkingmanager\\DtnParkingSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\DtnParkingSystem.csproj",
+        "projectUniqueName": "C:\\Users\\Seraphim.Nombre\\Desktop\\dtnparkingmanager\\DtnParkingSystem.csproj",
         "projectName": "DtnParkingSystem",
-        "projectPath": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\DtnParkingSystem.csproj",
-        "packagesPath": "C:\\Users\\Phim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Phim\\Documents\\DtnParkingManager\\obj\\",
+        "projectPath": "C:\\Users\\Seraphim.Nombre\\Desktop\\dtnparkingmanager\\DtnParkingSystem.csproj",
+        "packagesPath": "C:\\Users\\Seraphim.Nombre\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Seraphim.Nombre\\Desktop\\dtnparkingmanager\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Phim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Seraphim.Nombre\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

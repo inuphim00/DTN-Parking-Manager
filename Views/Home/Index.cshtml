@@ -39,7 +39,7 @@
 								</center>
 
 
-								if(parkingSpace.SlotType == "Cars"){
+								if(parkingSpace.SlotType == "Car"){
 									<h4 class="card-title">@Html.DropDownList(parkingSpace.SlotNumber+"|"+parkingSpace.Floor+"|"+parkingSpace.SlotType, new SelectList(ViewBag.CarList),"", new {id = "ddlOccupant", @class="js-example-responsive js-states form-control" ,style="width:100%;"})</h4>
 							}
 								else
