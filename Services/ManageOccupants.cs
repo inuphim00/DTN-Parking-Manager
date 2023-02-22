@@ -134,18 +134,6 @@ namespace DtnParkingSystem.Services
             {
 
                 var allOccupants = await _occupantsDAO.GetAll<Occupants>(default);
-                foreach (var docs in allOccupants)
-                {
-                    if (docs.FullName == fullName)
-                    {
-                        return ("User already exist");
-                    }
-                    else if (docs.PlateNumber == plateNumber)
-                    {
-                        return ("Plate number already exist");
-                    }
-
-                }
 
                 return ("Success");
             }
